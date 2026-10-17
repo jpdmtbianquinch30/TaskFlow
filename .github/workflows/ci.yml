@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: ['main', 'jour-*']
+  pull_request:
+    branches: ['main']
+  # Lancement manuel du workflow via l'interface GitHub
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm install
+
+      - run: npx ng build
+
+      - run: npx ng test --watch=false

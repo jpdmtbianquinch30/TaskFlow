@@ -1,0 +1,18 @@
+<header class="header">
+  <span class="logo">{{ appName }}</span>
+  <nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">Accueil</a>
+    @if(authService.isAuthenticated()){
+      <a routerLink="/projects" routerLinkActive="active">Mes projets</a>
+      <a routerLink="/assignments" routerLinkActive="active">Mes assignations</a>
+    }
+
+  </nav>
+  @if(authService.isAuthenticated()){
+    <span>{{ authService.currentUser()?.name }}</span>
+    <button mat-flat-button color="primary" (click)="onLogout()">Se déconnecter</button>
+  } @else {
+    <a routerLink="/register">Inscription</a>
+    <a mat-flat-button color="primary" routerLink="/login">Connexion</a>
+  }
+</header>

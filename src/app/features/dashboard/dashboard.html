@@ -1,0 +1,133 @@
+<section class="dashboard">
+  <header class="dash-head">
+    <div>
+      <h1>Bonjour {{ name() }}</h1>
+      <p class="subtitle">Voici l'état d'avancement de votre travail.</p>
+    </div>
+    <div class="dash-actions">
+      <mat-button-toggle-group [value]="scope()" (change)="scope.set($event.value)" aria-label="Choisir les données à analyser">
+        <mat-button-toggle value="projets">Mes projets</mat-button-toggle>
+        <mat-button-toggle value="assignations">Mes assignations</mat-button-toggle>
+      </mat-button-toggle-group>
+      <button mat-stroked-button type="button" (click)="reload()">Actualiser</button>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <p class="empty-state">Chargement des statistiques...</p>
+  } @else if (error()) {
+    <p class="empty-state">Impossible de charger les statistiques. Le serveur de données est-il lancé ?</p>
+  } @else if (stats().total === 0) {
+    <p class="empty-state">
+      @if (scope() === 'projets') {
+        Aucune tâche à analyser pour l'instant. <a routerLink="/projects">Créez un projet</a> puis ajoutez-y des tâches.
+      } @else {
+        Aucune tâche ne vous est assignée pour l'instant.
+      }
+    </p>
+  } @else {
+    <!-- Indicateurs clés -->
+    <div class="kpis">
+      <article class="kpi">
+        <span class="kpi-label">Tâches suivies</span>
+        <strong class="kpi-value">{{ stats().total }}</strong>
+        <span class="kpi-hint">{{ stats().counts.terminee }} terminée(s)</span>
+      </article>
+      <article class="kpi">
+        <span class="kpi-label">Réalisation</span>
+        <strong class="kpi-value">{{ stats().completion }}%</strong>
+        <div class="meter"><div class="meter-fill" [style.width.%]="stats().completion"></div></div>
+      </article>
+      <article class="kpi" [class.kpi--alert]="stats().overdue > 0">
+        <span class="kpi-label">En retard</span>
+        <strong class="kpi-value">{{ stats().overdue }}</strong>
+        <span class="kpi-hint">date limite dépassée</span>
+      </article>
+      <article class="kpi">
+        <span class="kpi-label">À rendre sous 7 jours</span>
+        <strong class="kpi-value">{{ stats().dueSoon }}</strong>
+        <span class="kpi-hint">dont {{ stats().urgentOpen }} urgente(s) ouverte(s)</span>
+      </article>
+      <article class="kpi">
+        <span class="kpi-label">Santé globale</span>
+        <span [class]="'health health--' + stats().health">{{ healthLabel() }}</span>
+        <span class="kpi-hint">selon les retards</span>
+      </article>
+    </div>
+
+    <!-- Répartition -->
+    <div class="two-cols">
+      <article class="card">
+        <h2>Avancement des tâches</h2>
+        <div class="donut-row">
+          <app-donut-chart [segments]="statusSegments()" [centerValue]="stats().completion + '%'" centerLabel="terminé" />
+          <ul class="legend">
+            @for (s of statusSegments(); track s.label) {
+              <li><span class="dot" [style.background]="s.color"></span>{{ s.label }} <strong>{{ s.value }}</strong></li>
+            }
+          </ul>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Répartition par priorité</h2>
+        <ul class="bars">
+          @for (b of priorityBars(); track b.label) {
+            <li>
+              <span class="bar-label">{{ b.label }}</span>
+              <div class="bar-track"><div class="bar-fill" [style.width.%]="b.width" [style.background]="b.color"></div></div>
+              <strong class="bar-value">{{ b.value }}</strong>
+            </li>
+          }
+        </ul>
+      </article>
+    </div>
+
+    <!-- Par projet -->
+    <article class="card">
+      <h2>Avancement par projet</h2>
+      <ul class="projects">
+        @for (p of stats().projects; track p.projectId) {
+          <li>
+            <div class="project-head">
+              <a [routerLink]="projectLink(p.projectId)">{{ p.name }}</a>
+              <span [class]="'health health--' + p.health">{{ healthLabels[p.health] }}</span>
+            </div>
+            <div class="stack" role="img" [attr.aria-label]="p.counts.terminee + ' terminées sur ' + p.total">
+              <div class="seg seg--terminee" [style.width.%]="barWidth(p.counts.terminee, p.total)"></div>
+              <div class="seg seg--en_cours" [style.width.%]="barWidth(p.counts.en_cours, p.total)"></div>
+              <div class="seg seg--a_faire" [style.width.%]="barWidth(p.counts.a_faire, p.total)"></div>
+            </div>
+            <p class="project-meta">
+              {{ p.completion }}% terminé · {{ p.counts.terminee }}/{{ p.total }} tâche(s)
+              @if (p.overdue > 0) { · <span class="late">{{ p.overdue }} en retard</span> }
+            </p>
+          </li>
+        }
+      </ul>
+    </article>
+
+    <!-- Échéances -->
+    <article class="card">
+      <h2>Prochaines échéances</h2>
+      @if (stats().upcoming.length === 0) {
+        <p class="empty-state">Toutes les tâches sont terminées. Bravo !</p>
+      } @else {
+        <ul class="deadlines">
+          @for (t of stats().upcoming; track t.id) {
+            <li>
+              <div class="deadline-main">
+                <a [routerLink]="projectLink(t.projectId)">{{ t.title }}</a>
+                <span class="deadline-project">{{ projectNames().get(t.projectId) }}</span>
+              </div>
+              <app-priority-badge [priority]="t.priority" />
+              <span class="deadline-date" [class.late]="isLate(t)">
+                {{ t.dueDate | date: 'dd/MM/yyyy' }} · {{ dueLabel(t) }}
+              </span>
+            </li>
+          }
+        </ul>
+      }
+    </article>
+  }
+</section>

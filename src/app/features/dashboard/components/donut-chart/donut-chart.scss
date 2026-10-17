@@ -1,0 +1,35 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 190px;
+}
+
+.donut {
+  width: 100%;
+  height: auto;
+}
+
+.track {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 12;
+}
+
+.arc {
+  fill: none;
+  stroke-width: 12;
+  transition: stroke-dasharray 0.4s ease;
+}
+
+.center-value {
+  text-anchor: middle;
+  font-size: 18px;
+  font-weight: 700;
+  fill: var(--color-ink);
+}
+
+.center-label {
+  text-anchor: middle;
+  font-size: 7px;
+  fill: var(--color-ink-muted);
+}

@@ -1,0 +1,50 @@
+:host {
+  display: block;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  text-decoration: none;
+}
+
+.status {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  text-transform: capitalize;
+  margin-bottom: 0.75rem;
+
+  &--actif {
+    color: var(--color-status-actif);
+    background: color-mix(in srgb, var(--color-status-actif) 15%, transparent);
+  }
+
+  &--en_pause {
+    color: var(--color-status-en_pause);
+    background: color-mix(in srgb, var(--color-status-en_pause) 15%, transparent);
+  }
+
+  &--termine {
+    color: var(--color-status-termine);
+    background: color-mix(in srgb, var(--color-status-termine) 15%, transparent);
+  }
+}
+
+.owner {
+  font-size: 0.85rem;
+}
+
+.section-title {
+  margin-top: 1.5rem;
+}
+
+.empty-state {
+  color: var(--color-ink-muted);
+}

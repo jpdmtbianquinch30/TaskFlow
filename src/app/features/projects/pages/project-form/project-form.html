@@ -1,0 +1,49 @@
+<div class="form-layout">
+  <form class="project-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1>Nouveau projet</h1>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nom du projet</mat-label>
+      <input matInput formControlName="name"/>
+      @if(form.pending){
+        <mat-hint>Vérification en cours !</mat-hint>
+      }
+      @if(form.controls.name.hasError('nameTaken') && form.controls.name.touched){
+        <mat-hint>Ce nom est déjà utilisé par un autre projet</mat-hint>
+      }
+      @if(form.controls.name.hasError('required') && form.controls.name.touched){
+        <mat-hint>Le nom est obligatoire</mat-hint>
+      }
+      @if(form.controls.name.hasError('minlength')){
+        <mat-hint>3 caractères minimum</mat-hint>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      @if(form.controls.description.hasError('required') && form.controls.description.touched){
+        <mat-hint>La description est obligatoire</mat-hint>
+      }
+      @if(form.controls.description.hasError('maxlength')){
+        <mat-hint>200 caractères maximum</mat-hint>
+      }
+    </mat-form-field>
+
+     <mat-form-field appearance="outline">
+      <mat-label>Statut</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="actif">Actif</mat-option>
+        <mat-option value="en_pause">En pause</mat-option>
+        <mat-option value="termine">Terminé</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || form.pending">
+      Créer le projet
+    </button>
+  </form>
+
+  <app-project-preview [draft]="draft()"/>
+</div>

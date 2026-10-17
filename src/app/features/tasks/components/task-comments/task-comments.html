@@ -1,0 +1,31 @@
+<div class="comments">
+  @if (loading()) {
+    <p class="muted">Chargement des commentaires...</p>
+  } @else if (comments().length === 0) {
+    <p class="muted">Aucun commentaire pour l'instant.</p>
+  } @else {
+    <ul>
+      @for (c of comments(); track c.id) {
+        <li>
+          <strong>{{ c.authorName }}</strong>
+          <span class="date">{{ c.createdAt | date: 'dd/MM/yyyy HH:mm' }}</span>
+          <p>{{ c.text }}</p>
+        </li>
+      }
+    </ul>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="comment-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Ajouter un commentaire</mat-label>
+      <textarea matInput rows="2" formControlName="text"></textarea>
+      @if (form.controls.text.hasError('maxlength')) {
+        <mat-hint>300 caractères maximum</mat-hint>
+      }
+    </mat-form-field>
+    @if (failed()) {
+      <p class="error">Le commentaire n'a pas pu être envoyé.</p>
+    }
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Commenter</button>
+  </form>
+</div>

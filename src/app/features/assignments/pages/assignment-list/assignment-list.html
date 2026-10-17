@@ -1,0 +1,16 @@
+<h1>Mes assignations ({{ projects().length }})</h1>
+<p>Les projets dans lesquels des tâches vous ont été assignées.</p>
+
+@if (loading()) {
+  <p class="empty-state">Chargement...</p>
+} @else if (projects().length === 0) {
+  <p class="empty-state">Aucune tâche ne vous a été assignée pour l'instant.</p>
+} @else {
+  <div class="project-grid">
+    @for (project of projects(); track project.id) {
+      <a [routerLink]="['/assignments', project.id]">
+        <app-project-card [project]="project" [subtitle]="subtitleOf(project)" />
+      </a>
+    }
+  </div>
+}

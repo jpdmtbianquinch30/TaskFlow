@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  max-width: 720px;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  text-decoration: none;
+}
+
+.empty-state {
+  color: var(--color-ink-muted);
+}

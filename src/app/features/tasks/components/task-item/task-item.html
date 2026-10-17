@@ -1,0 +1,44 @@
+<article class="task">
+  <header class="task-head">
+    <h3>{{ task().title }}</h3>
+    <div class="badges">
+      <span [class]="'status-badge status-badge--' + status()">{{ statusLabel() }}</span>
+      <span [class]="'badge badge--' + task().priority">{{ priorityLabel() }}</span>
+    </div>
+  </header>
+
+  @if (task().description) {
+    <p class="task-description">{{ task().description }}</p>
+  }
+
+  <div class="task-meta">
+    <span>Assignée à : {{ assigneeNames().join(', ') }}</span>
+    @if (task().dueDate) {
+      <span [class.late]="overdue()">Date limite : {{ task().dueDate | date: 'dd/MM/yyyy' }}@if (overdue()) { (dépassée) }</span>
+    }
+  </div>
+
+  <div class="task-actions">
+    @if (editable()) {
+      <mat-form-field class="status-field" appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Statut</mat-label>
+        <mat-select [value]="status()" (selectionChange)="onStatusChange($event.value)">
+          @for (s of statuses; track s.value) {
+            <mat-option [value]="s.value">{{ s.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+    <button mat-button type="button" (click)="showComments.set(!showComments())">
+      {{ showComments() ? 'Masquer les commentaires' : 'Commentaires' }}
+    </button>
+    @if (editable()) {
+      <a mat-button [routerLink]="['/projects', task().projectId, 'tasks', task().id, 'edit']">Modifier</a>
+      <button mat-button type="button" class="danger" (click)="onDelete()">Supprimer</button>
+    }
+  </div>
+
+  @if (showComments()) {
+    <app-task-comments [taskId]="task().id" />
+  }
+</article>

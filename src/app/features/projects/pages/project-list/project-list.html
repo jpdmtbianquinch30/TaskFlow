@@ -1,0 +1,72 @@
+<div class="page-head">
+  <h1>Mes projets ({{ projects().length }})</h1>
+  <a mat-flat-button color="primary" routerLink="/projects/new">Nouveau projet</a>
+</div>
+<p>{{ activeProjectsCount() }} projet(s) actif(s)</p>
+
+<div class="filters">
+  <span class="filters-label">Statut :</span>
+  <mat-button-toggle-group [value]="statusFilter()" (change)="statusFilter.set($event.value)" aria-label="Filtrer par statut">
+    <mat-button-toggle value="tous">Tous</mat-button-toggle>
+    @for (s of statuses; track s.value) {
+      <mat-button-toggle [value]="s.value">{{ s.label }}</mat-button-toggle>
+    }
+  </mat-button-toggle-group>
+</div>
+
+<div class="filters">
+  <span class="filters-label">Date de création :</span>
+  <label class="date-field">
+    <span class="filters-label">du</span>
+    <input type="date" class="date-input" [formControl]="dateFromCtrl" [attr.max]="dateTo() || null" aria-label="Créé à partir du" />
+  </label>
+  <label class="date-field">
+    <span class="filters-label">au</span>
+    <input type="date" class="date-input" [formControl]="dateToCtrl" [attr.min]="dateFrom() || null" aria-label="Créé jusqu'au" />
+  </label>
+  @if (dateFilterActive()) {
+    <button mat-stroked-button type="button" (click)="resetDateFilter()">Réinitialiser les dates</button>
+  }
+</div>
+@if (dateRangeInvalid()) {
+  <p class="error">La date de début doit être antérieure ou égale à la date de fin.</p>
+}
+
+@if (loading()){
+  <p class="empty-state">Chargement des projets .....</p>
+} @else if (projects().length === 0){
+  <p class="empty-state">Vous n'avez encore créé aucun projet.</p>
+} @else {
+  <p class="hint">Glissez un projet dans une autre colonne pour changer son statut (visible aussi par les personnes assignées).</p>
+  @if (statusError()) {
+    <p class="error">Le changement de statut a échoué, le projet a repris son ancien statut.</p>
+  }
+  @if (filtersActive()) {
+    <p class="hint">{{ filteredCount() }} projet(s) affiché(s) sur {{ projects().length }}.</p>
+  }
+
+  @if (dateFilterActive() && filteredCount() === 0) {
+    <p class="empty-state">Aucun projet ne correspond aux dates choisies.</p>
+  } @else {
+  <div class="board" cdkDropListGroup>
+    @for (col of columns(); track col.value) {
+      <section class="column">
+        <h2 class="column-title">
+          <span [class]="'dot dot--' + col.value"></span>{{ col.label }}
+          <span class="count">{{ col.projects.length }}</span>
+        </h2>
+        <div class="drop-zone" cdkDropList [cdkDropListData]="col.projects" (cdkDropListDropped)="onDrop($event, col.value)">
+          @for (project of col.projects; track project.id) {
+            <div class="drag-item" cdkDrag [cdkDragData]="project" (cdkDragEnded)="onDragEnded()">
+              <app-project-card [project]="project" (selected)="onProjectSelected($event)"/>
+              <div class="drag-placeholder" *cdkDragPlaceholder></div>
+            </div>
+          } @empty {
+            <p class="column-empty">Déposez un projet ici</p>
+          }
+        </div>
+      </section>
+    }
+  </div>
+  }
+}

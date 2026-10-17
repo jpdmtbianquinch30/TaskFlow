@@ -1,0 +1,41 @@
+@if (loading()){
+<p class="empty-state">Chargement en cours...</p>
+}@else if (notFound()){
+<p class="empty-state">Ce projet n'existe pas</p>
+<a routerLink="/projects">← Mes projets</a>
+}@else if (project(); as p){
+<a routerLink="/projects" class="back">← Mes projets</a>
+<h1>{{ p.name}}</h1>
+<p>{{ p.description}}</p>
+<span [class]="'status status--' + p.status">{{ p.status.replace('_', ' ') }}</span>
+
+<div class="toolbar">
+  <h2 class="section-title">Tâches ({{ visibleTasks().length }})</h2>
+  <a mat-flat-button color="primary" [routerLink]="['/projects', p.id, 'tasks', 'new']">Ajouter une tâche</a>
+</div>
+
+<app-task-filters [(filters)]="filters" />
+
+@if (tasksLoading()) {
+  <p class="empty-state">Chargement des tâches...</p>
+} @else if (tasks().length === 0) {
+  <p class="empty-state">Aucune tâche pour ce projet. Cliquez sur « Ajouter une tâche ».</p>
+} @else if (visibleTasks().length === 0) {
+  <p class="empty-state">Aucune tâche ne correspond aux filtres.</p>
+} @else {
+  @for (t of visibleTasks(); track t.id) {
+    <app-task-item [task]="t" [editable]="true" />
+  }
+}
+
+@if(previousProject() || nextProject()){
+<nav class="project-navigation">
+  @if(previousProject(); as prev){
+    <a [routerLink]="['/projects', prev.id]" class="nav-btn nav-btn--prev">Précédent</a>
+  }
+  @if(nextProject(); as next){
+    <a [routerLink]="['/projects', next.id]" class="nav-btn nav-btn--next">Suivant ({{ next.name }})</a>
+  }
+  </nav>
+}
+}

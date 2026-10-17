@@ -1,0 +1,89 @@
+<form class="task-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Titre de la tâche</mat-label>
+    <input matInput formControlName="title" />
+    @if (form.controls.title.hasError('required') && form.controls.title.touched) {
+      <mat-hint>Le titre est obligatoire</mat-hint>
+    }
+    @if (form.controls.title.hasError('minlength') && form.controls.title.touched) {
+      <mat-hint>3 caractères minimum</mat-hint>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput rows="4" formControlName="description"></textarea>
+    @if (form.controls.description.hasError('required') && form.controls.description.touched) {
+      <mat-hint>La description est obligatoire</mat-hint>
+    }
+    @if (form.controls.description.hasError('maxlength')) {
+      <mat-hint>500 caractères maximum</mat-hint>
+    }
+  </mat-form-field>
+
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Priorité</mat-label>
+      <mat-select formControlName="priority">
+        @for (p of priorities; track p.value) {
+          <mat-option [value]="p.value">{{ p.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Date limite</mat-label>
+      <input matInput type="date" formControlName="dueDate" />
+      @if (form.controls.dueDate.hasError('required') && form.controls.dueDate.touched) {
+        <mat-hint>La date limite est obligatoire</mat-hint>
+      }
+    </mat-form-field>
+  </div>
+
+  @if (task()) {
+    <mat-form-field appearance="outline">
+      <mat-label>Statut</mat-label>
+      <mat-select formControlName="status">
+        @for (s of statuses; track s.value) {
+          <mat-option [value]="s.value">{{ s.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  }
+
+  <div class="assign">
+    <mat-form-field appearance="outline">
+      <mat-label>Assigner par email</mat-label>
+      <input matInput type="email" [formControl]="newEmail" placeholder="nom@exemple.com"
+             (keydown.enter)="$event.preventDefault(); addAssignee()" />
+    </mat-form-field>
+    <button mat-stroked-button type="button" (click)="addAssignee()" [disabled]="checking()">Ajouter</button>
+  </div>
+
+  @if (emailError()) {
+    <p class="field-error">{{ emailError() }}</p>
+  }
+  @if (assignees().length > 0) {
+    <ul class="chips">
+      @for (e of assignees(); track e) {
+        <li>
+          {{ e }}
+          <button type="button" (click)="removeAssignee(e)" [attr.aria-label]="'Retirer ' + e">×</button>
+        </li>
+      }
+    </ul>
+  }
+  @if (submitted() && form.controls.assigneeEmails.hasError('required')) {
+    <p class="field-error">Assignez la tâche à au moins une personne (saisissez un email puis « Ajouter »).</p>
+  }
+  @if (failed()) {
+    <p class="field-error">L'enregistrement a échoué. Réessayez.</p>
+  }
+
+  <div class="actions">
+    <button mat-flat-button color="primary" type="submit" [disabled]="saving()">
+      {{ task() ? 'Enregistrer' : 'Ajouter la tâche' }}
+    </button>
+    <button mat-button type="button" (click)="cancelled.emit()">Annuler</button>
+  </div>
+</form>

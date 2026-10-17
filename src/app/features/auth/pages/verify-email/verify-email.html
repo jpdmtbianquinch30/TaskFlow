@@ -1,0 +1,24 @@
+<div class="login-layout">
+  <div class="login-form">
+    <h1>Confirmation de l'email</h1>
+
+    @switch (state()) {
+      @case ('loading') {
+        <p>Vérification en cours...</p>
+      }
+      @case ('success') {
+        <p class="login-success">Votre adresse email est confirmée. Votre compte est actif.</p>
+        <a mat-flat-button color="primary" routerLink="/login">Se connecter</a>
+      }
+      @case ('expired') {
+        <p class="login-error">Ce lien a expiré (validité : 24 h).</p>
+        <p>Connectez-vous avec vos identifiants : un bouton vous permettra de recevoir un nouvel email.</p>
+        <a mat-flat-button color="primary" routerLink="/login">Aller à la connexion</a>
+      }
+      @case ('invalid') {
+        <p class="login-error">Ce lien est invalide ou a déjà été utilisé.</p>
+        <a mat-stroked-button routerLink="/login">Retour à la connexion</a>
+      }
+    }
+  </div>
+</div>

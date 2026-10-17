@@ -1,0 +1,20 @@
+@if (loading()) {
+  <p class="empty-state">Chargement en cours...</p>
+} @else if (project(); as p) {
+  <a routerLink="/assignments" class="back">← Mes assignations</a>
+  <h1>{{ p.name }}</h1>
+  <p>{{ p.description }}</p>
+  <span [class]="'status status--' + p.status">{{ p.status.replace('_', ' ') }}</span>
+  <p class="owner">Projet créé par {{ p.ownerName || p.ownerEmail }}</p>
+
+  <h2 class="section-title">Mes tâches ({{ myTasks().length }})</h2>
+  <app-task-filters [(filters)]="filters" />
+  @for (t of visibleTasks(); track t.id) {
+    <app-task-item [task]="t" [editable]="false" />
+  } @empty {
+    <p class="empty-state">Aucune tâche ne correspond aux filtres.</p>
+  }
+} @else {
+  <p class="empty-state">Ce projet ne figure pas dans vos assignations.</p>
+  <a routerLink="/assignments">← Mes assignations</a>
+}

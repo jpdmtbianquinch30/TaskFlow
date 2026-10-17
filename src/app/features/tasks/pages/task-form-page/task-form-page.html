@@ -1,0 +1,13 @@
+@if (loading()) {
+  <p class="empty-state">Chargement...</p>
+} @else if (notFound()) {
+  <p class="empty-state">Cette page n'existe pas.</p>
+  <a routerLink="/projects">← Mes projets</a>
+} @else if (project(); as p) {
+  <a [routerLink]="['/projects', p.id]" class="back">← {{ p.name }}</a>
+  <h1>{{ isEdit ? 'Modifier la tâche' : 'Nouvelle tâche' }}</h1>
+
+  <app-panel [title]="isEdit ? 'Modifier la tâche' : 'Nouvelle tâche pour ' + p.name">
+    <app-task-form [projectId]="p.id" [task]="task()" (saved)="backToProject()" (cancelled)="backToProject()" />
+  </app-panel>
+}

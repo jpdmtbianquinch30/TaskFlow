@@ -1,0 +1,22 @@
+.login-layout {
+  display: flex;
+  justify-content: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-error {
+  color: var(--color-error);
+  margin: 0;
+
+}
+
+mat-form-field {
+  width: 100%;
+}

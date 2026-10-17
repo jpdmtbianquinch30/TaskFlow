@@ -1,0 +1,10 @@
+@if (authService.isAuthenticated()) {
+  <app-dashboard />
+} @else {
+  <h1>Bienvenue dans TaskFlow</h1>
+  <p>La plateforme de gestion de projets d'équipe : créez vos projets, assignez des tâches par email et suivez l'avancement.</p>
+  <p>
+    <a routerLink="/login">Connexion</a> ·
+    <a routerLink="/register">Créer un compte</a>
+  </p>
+}

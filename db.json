@@ -1,0 +1,299 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Refonte Facturation",
+      "description": "Migration vers la nouvelle API de paiement",
+      "status": "actif",
+      "tasksCount": 4,
+      "ownerEmail": "moustapha@taskflow.dev",
+      "ownerName": "Moustapha Diouf",
+      "createdAt": "2026-09-02"
+    },
+    {
+      "id": 2,
+      "name": "App Mobile RH",
+      "description": "Application de gestion des congés",
+      "status": "en_pause",
+      "tasksCount": 0,
+      "ownerEmail": "moustapha@taskflow.dev",
+      "ownerName": "Moustapha Diouf",
+      "createdAt": "2026-09-15"
+    },
+    {
+      "id": 3,
+      "name": "Portail Client",
+      "description": "Espace self-service pour les clients",
+      "status": "termine",
+      "tasksCount": 0,
+      "ownerEmail": "moustapha@taskflow.dev",
+      "ownerName": "Moustapha Diouf",
+      "createdAt": "2026-09-10"
+    },
+    {
+      "name": "Test",
+      "description": "Test",
+      "status": "en_pause",
+      "tasksCount": 0,
+      "id": 4,
+      "ownerEmail": "moustapha@taskflow.dev",
+      "ownerName": "Moustapha Diouf",
+      "createdAt": "2026-09-22"
+    },
+    {
+      "name": "dsfddf",
+      "description": "fdfd",
+      "status": "actif",
+      "tasksCount": 0,
+      "id": 5,
+      "ownerEmail": "moustapha@taskflow.dev",
+      "ownerName": "Moustapha Diouf",
+      "createdAt": "2026-09-12"
+    },
+    {
+      "name": "House",
+      "description": "house is mine",
+      "status": "actif",
+      "tasksCount": 0,
+      "id": 6,
+      "ownerEmail": "moustapha@taskflow.dev",
+      "ownerName": "Moustapha Diouf",
+      "createdAt": "2026-09-22"
+    },
+    {
+      "name": "Taskflow",
+      "description": "Projet exam ",
+      "status": "termine",
+      "tasksCount": 1,
+      "ownerEmail": "jean@taskflow.dev",
+      "ownerName": "Jean Diego",
+      "id": 7
+    },
+    {
+      "name": "Projet Java",
+      "description": "Ce projet met en place le backend avec du sprintboot",
+      "status": "actif",
+      "tasksCount": 1,
+      "ownerEmail": "mabydiop0324@gmail.com",
+      "ownerName": "Mame Aby DIOP",
+      "id": 8
+    },
+    {
+      "name": "Taskflow",
+      "description": "gestion de projet",
+      "status": "actif",
+      "tasksCount": 0,
+      "ownerEmail": "mameaby@taskflow.dev",
+      "ownerName": "Mame Aby Diop",
+      "id": 9
+    },
+    {
+      "name": "test ",
+      "description": "test project",
+      "status": "en_pause",
+      "tasksCount": 1,
+      "ownerEmail": "mameaby@taskflow.dev",
+      "ownerName": "Mame Aby Diop",
+      "createdAt": "2026-10-11",
+      "id": 10
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "projectId": 1,
+      "title": "Analyser l'ancienne API de paiement",
+      "priority": "haute",
+      "dueDate": "2026-10-20",
+      "createdAt": "2026-10-09T09:00:00.000Z",
+      "assigneeEmails": [
+        "jean@taskflow.dev",
+        "mameaby@taskflow.dev",
+        "peoplechoicesn@gmail.com"
+      ],
+      "description": "Étudier les endpoints, les formats d'échange et les cas d'erreur de l'ancienne API."
+    },
+    {
+      "id": 2,
+      "projectId": 1,
+      "title": "Écrire les tests de migration",
+      "priority": "moyenne",
+      "dueDate": "2026-10-30",
+      "createdAt": "2026-10-09T09:00:00.000Z",
+      "assigneeEmails": [
+        "jean@taskflow.dev"
+      ],
+      "description": "Couvrir les scénarios de migration des factures existantes."
+    },
+    {
+      "id": 3,
+      "projectId": 1,
+      "title": "Corriger l'erreur de facturation en production",
+      "priority": "urgente",
+      "dueDate": "2026-10-15",
+      "createdAt": "2026-10-09T09:00:00.000Z",
+      "assigneeEmails": [
+        "jean@taskflow.dev"
+      ],
+      "description": "Reproduire l'erreur, trouver la cause et déployer le correctif."
+    },
+    {
+      "title": "Salamalekoum",
+      "priority": "haute",
+      "assigneeEmails": [
+        "jean@taskflow.dev"
+      ],
+      "dueDate": "2026-10-10",
+      "projectId": 1,
+      "createdAt": "2026-10-09T20:14:49.355Z",
+      "id": 4,
+      "description": "Dire bonjour à toute l'équipe."
+    },
+    {
+      "title": "Test",
+      "description": "Bonjour les amis",
+      "priority": "moyenne",
+      "assigneeEmails": [
+        "mameaby@taskflow.dev",
+        "moustapha@taskflow.dev"
+      ],
+      "dueDate": "2026-10-10",
+      "projectId": 7,
+      "createdAt": "2026-10-09T22:34:39.183Z",
+      "id": 5,
+      "status": "terminee"
+    },
+    {
+      "title": "Gestion des environnements",
+      "description": "gerer les fichier pom.xml et .env",
+      "priority": "moyenne",
+      "assigneeEmails": [
+        "mameaby@taskflow.dev",
+        "jean@taskflow.dev"
+      ],
+      "dueDate": "2026-10-09",
+      "projectId": 8,
+      "createdAt": "2026-10-10T22:21:19.833Z",
+      "id": 6
+    },
+    {
+      "title": "Recopier le cour de java",
+      "description": "L'envoyer ensuite sur mon mail",
+      "priority": "haute",
+      "status": "terminee",
+      "assigneeEmails": [
+        "jean@taskflow.dev"
+      ],
+      "dueDate": "2026-10-20",
+      "projectId": 10,
+      "createdAt": "2026-10-17T02:13:35.866Z",
+      "id": 7
+    }
+  ],
+  "comments": [
+    {
+      "taskId": 5,
+      "authorId": "68fe5f7e-06c1-428c-9d87-71c861ab8b62",
+      "authorName": "Jean Diego",
+      "text": "bonjour",
+      "createdAt": "2026-10-09T22:34:50.733Z",
+      "id": 1
+    },
+    {
+      "taskId": 5,
+      "authorId": "68fe5f7e-06c1-428c-9d87-71c861ab8b62",
+      "authorName": "Jean Diego",
+      "text": "Que faites vous",
+      "createdAt": "2026-10-09T22:35:03.470Z",
+      "id": 2
+    },
+    {
+      "taskId": 5,
+      "authorId": "0f6b8ae6-43cb-4e42-806f-ec1872031dce",
+      "authorName": "Mame Aby Diop",
+      "text": "Oui cava bien",
+      "createdAt": "2026-10-09T22:36:03.136Z",
+      "id": 3
+    },
+    {
+      "taskId": 6,
+      "authorId": "57a6d67f-1e30-4ed9-af2c-6875513fa557",
+      "authorName": "Mame Aby DIOP",
+      "text": "Bonsoir j'avais gerer le pom.xml donc gere le .env",
+      "createdAt": "2026-10-10T22:24:07.191Z",
+      "id": 4
+    },
+    {
+      "taskId": 1,
+      "authorId": "16799faf-540f-44c6-9cb3-7cf4070371fe",
+      "authorName": "Mame Aby Diop",
+      "text": "Merci",
+      "createdAt": "2026-10-10T22:41:18.800Z",
+      "id": 5
+    },
+    {
+      "taskId": 5,
+      "authorId": "16799faf-540f-44c6-9cb3-7cf4070371fe",
+      "authorName": "Mame Aby Diop",
+      "text": "on a presque fini",
+      "createdAt": "2026-10-10T22:42:21.441Z",
+      "id": 6
+    },
+    {
+      "taskId": 6,
+      "authorId": "16799faf-540f-44c6-9cb3-7cf4070371fe",
+      "authorName": "Mame Aby Diop",
+      "text": "desolée pour le retard",
+      "createdAt": "2026-10-10T22:42:54.381Z",
+      "id": 7
+    },
+    {
+      "taskId": 6,
+      "authorId": "31830aaf-d1b1-4951-989e-5b63d44352f8",
+      "authorName": "Jean Diego",
+      "text": "cooking",
+      "createdAt": "2026-10-17T01:39:12.583Z",
+      "id": 8
+    },
+    {
+      "taskId": 7,
+      "authorId": "e19cb1ea-53fb-4e86-82a9-cfd458b7a076",
+      "authorName": "Mame Aby Diop",
+      "text": "j'ai deja push mon projet verifiez",
+      "createdAt": "2026-10-17T02:14:13.229Z",
+      "id": 9
+    },
+    {
+      "taskId": 7,
+      "authorId": "31830aaf-d1b1-4951-989e-5b63d44352f8",
+      "authorName": "Jean Diego",
+      "text": "j'ai recuperer le projet",
+      "createdAt": "2026-10-17T02:17:31.223Z",
+      "id": 10
+    },
+    {
+      "taskId": 7,
+      "authorId": "31830aaf-d1b1-4951-989e-5b63d44352f8",
+      "authorName": "Jean Diego",
+      "text": "j'ai terminé",
+      "createdAt": "2026-10-17T02:17:46.455Z",
+      "id": 11
+    },
+    {
+      "taskId": 7,
+      "authorId": "e19cb1ea-53fb-4e86-82a9-cfd458b7a076",
+      "authorName": "Mame Aby Diop",
+      "text": "vous avez fait erreur sur la partie productcontroller.php corriger le",
+      "createdAt": "2026-10-17T02:18:53.571Z",
+      "id": 12
+    },
+    {
+      "taskId": 7,
+      "authorId": "31830aaf-d1b1-4951-989e-5b63d44352f8",
+      "authorName": "Jean Diego",
+      "text": "fait",
+      "createdAt": "2026-10-17T02:19:24.270Z",
+      "id": 13
+    }
+  ]
+}

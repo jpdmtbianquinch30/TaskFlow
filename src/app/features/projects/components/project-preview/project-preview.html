@@ -1,0 +1,16 @@
+<mat-card class="preview-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ draft?.name || 'Nouveau projet' }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{ draft?.description || 'Aucune description pour l\'instant.' }}
+    </p>
+    <p>
+      {{ draft?.status }}
+    </p>
+  </mat-card-content>
+<mat-card-footer>
+  <small>Apercu mis à jour {{ updateCount }} fois</small>
+</mat-card-footer>
+</mat-card>

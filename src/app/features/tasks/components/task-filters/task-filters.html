@@ -1,0 +1,42 @@
+<div class="task-filters">
+  <div class="group">
+    <span class="label">Statut :</span>
+    <mat-button-toggle-group [value]="filters().status" (change)="setStatus($event.value)" aria-label="Filtrer par statut">
+      <mat-button-toggle value="tous">Tous</mat-button-toggle>
+      @for (s of statuses; track s.value) {
+        <mat-button-toggle [value]="s.value">{{ s.label }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="group">
+    <span class="label">Priorité :</span>
+    <mat-button-toggle-group [value]="filters().priority" (change)="setPriority($event.value)" aria-label="Filtrer par priorité">
+      <mat-button-toggle value="toutes">Toutes</mat-button-toggle>
+      @for (p of priorities; track p.value) {
+        <mat-button-toggle [value]="p.value">{{ p.label }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="group">
+    <span class="label">Date limite :</span>
+    <label class="date-field">
+      <span class="label">du</span>
+      <input type="date" [value]="filters().from" [attr.max]="filters().to || null"
+             (change)="setFrom($any($event.target).value)" aria-label="Date limite à partir du" />
+    </label>
+    <label class="date-field">
+      <span class="label">au</span>
+      <input type="date" [value]="filters().to" [attr.min]="filters().from || null"
+             (change)="setTo($any($event.target).value)" aria-label="Date limite jusqu'au" />
+    </label>
+  </div>
+
+  @if (rangeInvalid()) {
+    <p class="error">La date de début doit être antérieure ou égale à la date de fin.</p>
+  }
+  @if (active()) {
+    <button mat-stroked-button type="button" (click)="reset()">Réinitialiser les filtres</button>
+  }
+</div>

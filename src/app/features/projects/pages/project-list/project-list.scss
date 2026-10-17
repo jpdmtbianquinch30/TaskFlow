@@ -1,0 +1,136 @@
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.filters-label {
+  font-size: 0.9rem;
+  color: var(--color-ink-muted);
+}
+
+.date-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.date-input {
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.hint {
+  font-size: 0.85rem;
+}
+
+.error {
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.column {
+  background: color-mix(in srgb, var(--color-border) 35%, transparent);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+}
+
+.column-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+
+  .count {
+    margin-left: auto;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+  }
+}
+
+.dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+
+  &--actif { background: var(--color-status-actif); }
+  &--en_pause { background: var(--color-status-en_pause); }
+  &--termine { background: var(--color-status-termine); }
+}
+
+.drop-zone {
+  min-height: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.drag-item {
+  cursor: grab;
+}
+
+.column-empty {
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 1.25rem 0;
+  margin: 0;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+}
+
+.drag-placeholder {
+  min-height: 5rem;
+  border: 2px dashed var(--color-primary);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.cdk-drag-preview {
+  box-shadow: var(--shadow);
+  opacity: 0.95;
+}
+
+.cdk-drag-animating,
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-ink-muted);
+}
+
+.config-debug {
+  font-size: 0.78rem;
+  color: var(--color-ink-muted);
+  font-style: italic;
+}

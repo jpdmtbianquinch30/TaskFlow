@@ -1,0 +1,34 @@
+/* Feuille de style PARTAGÉE par les 5 pages d'authentification (connexion, inscription, etc.) */
+.login-layout {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-error {
+  color: var(--color-error);
+  margin: 0;
+}
+
+.login-success {
+  color: var(--mat-sys-primary);
+  margin: 0;
+}
+
+.login-links {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+mat-form-field {
+  width: 100%;
+}

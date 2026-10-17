@@ -1,0 +1,11 @@
+<div class="project-card" (click)="onSelect()">
+        <h3>{{ project().name }}</h3>
+        <p>{{ project().description }}</p>
+        @if (subtitle()) {
+          <p class="subtitle">{{ subtitle() }}</p>
+        }
+                @if (project().createdAt) {
+          <p class="created">Créé le {{ project().createdAt | date: 'dd/MM/yyyy' }}</p>
+        }
+        <span [class]="'status status--' + project().status">{{ project().status.replace('_', ' ') }}</span>
+</div>

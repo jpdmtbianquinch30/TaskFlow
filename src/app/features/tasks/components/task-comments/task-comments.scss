@@ -1,0 +1,40 @@
+.comments {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--color-border);
+}
+
+ul {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.6rem;
+
+  p {
+    margin: 0.1rem 0 0;
+    color: var(--color-ink);
+    white-space: pre-wrap;
+  }
+}
+
+.date {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+}
+
+.muted {
+  font-size: 0.85rem;
+}
+
+.error {
+  color: var(--color-error);
+  font-size: 0.85rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
